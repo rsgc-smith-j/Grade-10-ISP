@@ -18,7 +18,7 @@ float r_width;
 
 float[] sum = new float[bands];
 
-float smooth_factor = 0.2;
+float smooth_factor = .3;
 
 void setup() {
   size(1000, 1000, P3D);
@@ -28,7 +28,7 @@ void setup() {
 
   r_width = width/float(bands);
 
-  sample = new SoundFile(this, "10 Waves.mp3");
+  sample = new SoundFile(this, "03 Waves.mp3");
   sample.loop();
   
   fft = new FFT(this, bands);
@@ -48,8 +48,6 @@ void draw() {
    }
   
   //smaller set of circles going left to right
-  //fill(255);
-  //text(sum[1],50,50);
   
   ellipse(300,400,sum[3]*scaleFactor1,sum[2]*scaleFactor1);
   ellipse(400,400,sum[3]*scaleFactor1,sum[2]*scaleFactor1);
