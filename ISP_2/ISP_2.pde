@@ -21,14 +21,14 @@ float[] sum = new float[bands];
 float smooth_factor = .3;
 
 void setup() {
-  size(1000, 1000, P3D);
-  frameRate(30);
+  size(1000, 1000);
+  frameRate(15);
  
   device = new AudioDevice(this, 44000, bands);
 
   r_width = width/float(bands);
 
-  sample = new SoundFile(this, "03 Waves.mp3");
+  sample = new SoundFile(this, "18 Fade.mp3");
   sample.loop();
   
   fft = new FFT(this, bands);
@@ -44,7 +44,8 @@ void draw() {
    fft.analyze();
   for (int i = 0; i < bands; i++) {
     // Smooth the FFT data by smoothing factor
-    sum[i] += (fft.spectrum[i] - sum[i]) * smooth_factor+1;
+    //sum[i] += (fft.spectrum[i] - sum[i]) * smooth_factor+1;
+    sum[i] = fft.spectrum[i];
    }
   
   //smaller set of circles going left to right
@@ -60,7 +61,8 @@ void draw() {
   ellipse(500,300,sum[3]*scaleFactor1,sum[2]*scaleFactor1);
   ellipse(500,200,sum[3]*scaleFactor1,sum[2]*scaleFactor1);
   ellipse(500,600,sum[3]*scaleFactor1,sum[2]*scaleFactor1);
-
+ 
+ 
   //larger set of circles going left to right
   ellipse(300,400,sum[10]*scaleFactor2,sum[30]*scaleFactor2);
   ellipse(400,400,sum[10]*scaleFactor2,sum[30]*scaleFactor2);
@@ -73,17 +75,18 @@ void draw() {
   ellipse(500,300,sum[4]*scaleFactor2,sum[4]*scaleFactor2);
   ellipse(500,200,sum[4]*scaleFactor2,sum[4]*scaleFactor2);
   ellipse(500,600,sum[4]*scaleFactor2,sum[4]*scaleFactor2);
+   
   
     //largest set of circles going left to right
-  ellipse(300,400,sum[1]*scaleFactor2,sum[2]*scaleFactor1);
-  ellipse(400,400,sum[1]*scaleFactor2,sum[2]*scaleFactor1);
-  ellipse(500,400,sum[1]*scaleFactor2,sum[2]*scaleFactor1);
-  ellipse(600,400,sum[1]*scaleFactor2,sum[2]*scaleFactor1);
-  ellipse(700,400,sum[1]*scaleFactor2,sum[2]*scaleFactor1);
+  ellipse(300,400,sum[6]*scaleFactor2,sum[6]*scaleFactor1);
+  ellipse(400,400,sum[6]*scaleFactor2,sum[6]*scaleFactor1);
+  ellipse(500,400,sum[6]*scaleFactor2,sum[6]*scaleFactor1);
+  ellipse(600,400,sum[6]*scaleFactor2,sum[6]*scaleFactor1);
+  ellipse(700,400,sum[6]*scaleFactor2,sum[6]*scaleFactor1);
 
   //largest set of circles going up and down
-  ellipse(500,500,sum[1]*scaleFactor3,sum[2]*scaleFactor1);
-  ellipse(500,300,sum[1]*scaleFactor3,sum[2]*scaleFactor1);
-  ellipse(500,200,sum[1]*scaleFactor3,sum[2]*scaleFactor1);
-  ellipse(500,600,sum[1]*scaleFactor3,sum[2]*scaleFactor1);
+  ellipse(500,500,sum[6]*scaleFactor3,sum[6]*scaleFactor1);
+  ellipse(500,300,sum[6]*scaleFactor3,sum[6]*scaleFactor1);
+  ellipse(500,200,sum[6]*scaleFactor3,sum[6]*scaleFactor1);
+  ellipse(500,600,sum[6]*scaleFactor3,sum[6]*scaleFactor1);
 }
